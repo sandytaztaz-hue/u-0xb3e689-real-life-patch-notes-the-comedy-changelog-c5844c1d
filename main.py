@@ -1,8 +1,9 @@
-import os
+from pathlib import Path
 
-# Deterministic: writes the same single line on every run, no trailing newline.
-LINE = "v1.9.3: fixed a bug where hiccups started 2 minutes into every job interview and stopped the second it ended."
+LINE = "v2.0.4: fixed a bug where the tongue kept re-clicking the bitten cheek for three days straight."
 
-os.makedirs("/output", exist_ok=True)
-with open("/output/entry.txt", "w", encoding="utf-8") as f:
-    f.write(LINE)
+out = Path("/output/entry.txt")
+out.parent.mkdir(parents=True, exist_ok=True)
+text = LINE.strip()
+assert 1 <= len(text) <= 160
+out.write_text(text, encoding="utf-8")
